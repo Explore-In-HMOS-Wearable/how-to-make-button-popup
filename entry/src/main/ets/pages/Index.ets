@@ -1,6 +1,4 @@
-import { router } from '@kit.ArkUI'
 import {promptAction} from '@kit.ArkUI';
-
 
 class Expense {
   category: string
@@ -9,19 +7,18 @@ class Expense {
     this.category = category
     this.amount = amount
   }
-
 }
-export class ExpenseStore{
+export class ExpenseStore {
   static expenses: Expense[] = []
-  static addExpense(category: string, amount:number){
+  static addExpense(category: string, amount:number) {
     ExpenseStore.expenses.push(new Expense(category,amount))
   }
-  static getAll(): Expense[]{
+  static getAll(): Expense[] {
     return ExpenseStore.expenses
   }
-  static getTotalAmount(): number{
-    return ExpenseStore.expenses.reduce((total, expense) => total + expense.amount,0)
-  }
+  static getTotalAmount(): number {
+    return ExpenseStore.expenses.reduce((total, expense) => total + expense.amount, 0)
+   }
 }
 class MyDataSource implements IDataSource {
   private list: number[] = []
@@ -29,7 +26,6 @@ class MyDataSource implements IDataSource {
   constructor(list: number[]) {
     this.list = list
   }
-
 
   totalCount(): number {
     return this.list.length
@@ -52,7 +48,7 @@ struct Expenses {
 
   @State categories: string = ''
   @State amount: string = ''
-  @State expenseList: Expense[] =[]
+  @State expenseList: Expense[] = []
   @State handlePopup: boolean = false
 
   @Builder popupBuilder() {
@@ -60,7 +56,6 @@ struct Expenses {
       Text('Custom Popup with transitionEffect').fontSize(10)
     }.height(50).padding(5)
   }
-
 
   private data: MyDataSource = new MyDataSource([])
   list: number[] = []
@@ -74,21 +69,14 @@ struct Expenses {
 
   }
 
-  onPageShow(): void {
-    let newList = JSON.stringify(AppStorage.get("expenses"))
-
-    console.log(newList)
-  }
-
-  addNewIncome(){
-    this.list.push(this.list.length+1)
+  addNewIncome() {
+    this.list.push(this.list.length + 1)
   }
 
   scroller: Scroller = new Scroller()
   scrollerForList: Scroller = new Scroller()
-  private swiperController: SwiperController = new SwiperController()
   build() {
-    Scroll(this.scroller){
+    Scroll(this.scroller) {
       Column() {
         Text('Categories').margin({
           top: 20
@@ -99,7 +87,7 @@ struct Expenses {
         })
           .width('70%')
           .type(InputType.Normal)
-          .onChange((value: string) =>{
+          .onChange((value: string) => {
             this.categories = value
           })
         Text('Amount')
@@ -109,24 +97,24 @@ struct Expenses {
         })
           .width('70%')
           .type(InputType.Number)
-          .onChange((value: string) =>{
+          .onChange((value: string) => {
             this.amount = value
           })
-        Button("add").margin({
+        Button('add').margin({
           top : 10
-        }).onClick(() =>{
+        }).onClick(() => {
 
           this.handlePopup = !this.handlePopup
         }).bindPopup(this.handlePopup, {
           width : 200,
-          message : "Please Confirm",
+          message : 'Please Confirm',
           primaryButton: {
             value: 'Confirm',
             action: () => {
               this.handlePopup = !this.handlePopup
               this.expenseList.push(new Expense(this.categories,Number(this.amount)))
               ExpenseStore.addExpense(this.categories, Number(this.amount))
-              AppStorage.setOrCreate("expenses",this.expenseList)
+              AppStorage.setOrCreate('expenses', this.expenseList)
               this.categories = ''
               this.amount = ''
             }
@@ -134,8 +122,8 @@ struct Expenses {
           secondaryButton: {
             value : 'Cancel',
             action : () => {
-              promptAction.showToast({
-                message: "Deleted",
+              promptAction.openToast({
+                message: 'Deleted',
                 duration: 2000,
                 showMode: promptAction.ToastShowMode.TOP_MOST,
                 bottom: 10
@@ -146,26 +134,26 @@ struct Expenses {
             }
           },
           onStateChange: (e) => {
-            if(!e.isVisible){
+            if (!e.isVisible) {
               this.handlePopup = false
             }
           }
         })
-        Text("Lists").margin({
+        Text('Lists').margin({
           top: 10
         })
-        List({ space : 20, scroller: this.scrollerForList}){
-          ForEach(this.expenseList,(item: Expense) => {
-            ListItem(){
+        List({ space : 20, scroller: this.scrollerForList}) {
+          ForEach(this.expenseList, (item: Expense) => {
+            ListItem() {
               Text(`${item.category} ${item.amount}`)
                 .width('100%')
                 .textAlign(TextAlign.Center).borderRadius(10)
             }
-          })
-        }
+          }, (item: string, index: number) => item)
+        }.width('100%')
+        .height('100%')
         .padding(16)
       }
-
       .justifyContent(FlexAlign.Start)
       .alignItems(HorizontalAlign.Center)
     }.scrollable(ScrollDirection.Vertical)

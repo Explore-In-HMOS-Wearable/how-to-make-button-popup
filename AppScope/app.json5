@@ -1,7 +1,7 @@
 {
   "app": {
-    "bundleName": "com.sample.trdtse.myapplication",
-    "vendor": "example",
+    "bundleName": "com.hmosdemos.wearable.how_to_make_button_popup",
+    "vendor": "hmosdemos",
     "versionCode": 1000000,
     "versionName": "1.0.0",
     "icon": "$media:app_layered_image",

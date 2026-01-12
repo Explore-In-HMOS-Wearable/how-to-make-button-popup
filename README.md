@@ -7,48 +7,33 @@ This code lab shows how to use popup functionality for HarmonyOS devices
 # Preview
 
 <div>    
-  <img src="screenshots/ss1.png" width="25%">
-  <img src="screenshots/ss2.gif" width="25%">
+  <img src="screenshots/ss1.PNG" width="25%">
+  <img src="screenshots/ss2.PNG" width="25%">
 </div> 
 
 # Use Cases
 
 - Users can enter the item category and amount to see the related confirmation popup
 
-# Technology
-
-## Stack
+# Tech Stack
 
 - **Languages**: ArkTS
-- **Frameworks**: HarmonyOS SDK 5.0.2(14)
+- **Frameworks**: HarmonyOS SDK 5.1.0(18)
 - **Tools**: DevEco Studio Vers 5.1.0.842
 - **Libraries**: @kit.ArkUI
 
-## Required Permission
-
-- No permission required
-
-
 # Directory Structure
 
-````
-entry/src/main/ets/
-|---pages
-|---|---Index
-|---entryability
-|---|---EntryAbility
-|---entrybackupability
-|---|---EntryBackupAbility
-
-````
+   ```
+   entry/src/main/ets/
+    ├── pages/      
+    │ ├── Index.ets                           // Home Page
+   ```
 
 # Constraints and Restrictions
-
 ## Suported Devices
-
 - Huawei Watch 5
 
-# LICENSE
-
-Contact Groups is distributed under the terms of the MIT License.
-See the [LICENSE](/LICENSE) for more information.
+# License
+**PopUp** is distributed under the terms of the MIT License
+See the [LICENSE](./LICENSE) for more information.
