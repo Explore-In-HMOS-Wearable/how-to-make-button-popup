@@ -7,8 +7,8 @@ This code lab shows how to use popup functionality for HarmonyOS devices
 # Preview
 
 <div>    
-  <img src="screenshots/ss1.PNG" width="25%">
-  <img src="screenshots/ss2.PNG" width="25%">
+  <img src="screenshots/ss1.png" width="25%">
+  <img src="screenshots/ss2.png" width="25%">
 </div> 
 
 # Use Cases
